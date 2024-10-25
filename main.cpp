@@ -5,6 +5,8 @@
 #include <fstream>
 #include <iomanip>
 #include <list>
+#include <ctime> // for seeding time
+#include <cstdlib> // for randoms
 #include "Goat.h"
 using namespace std;
 
@@ -32,8 +34,60 @@ int main() {
     while (fin1 >> colors[i++]);
     fin1.close();
 
+    main_menu();
+
 
 
 
     return 0;
+}
+
+
+// function to display main menu, returns user's selection
+int main_menu() {
+    int userChoice;
+
+    do {
+        cout << "*** GOAT MANAGER 3001 ***" << endl;
+        cout << "[1] Add a goat" << endl;
+        cout << "[2] Delete a goat" << endl;
+        cout << "[3] List goats" << endl;
+        cout << "[4] Quit" << endl;
+        cout << "Choice --> ";
+        cin >> userChoice;
+
+        if (userChoice < 1 || userChoice > 4) {
+            cout << "Invalid input" << endl;
+        }
+
+    } while (userChoice < 1 || userChoice > 4);
+    
+    return userChoice;
+}
+
+
+// function to add a goat to the trip
+void add_goat(list<Goat> &trip, string [], string [])
+{
+    string goatName;
+    int goatAge;
+    string goatColor;
+
+    Goat newGoat();
+
+
+}
+
+// function to delete a goat from the trip
+void delete_goat(list<Goat> &trip)
+{
+
+
+}
+
+// function to display the current trip
+void display_trip(list<Goat> trip)
+{
+
+
 }
