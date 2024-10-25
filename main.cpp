@@ -20,7 +20,7 @@ int main_menu();
 
 int main() {
     srand(time(0));
-    bool again;
+    bool again = true;
 
     // read & populate arrays for names and colors
     ifstream fin("names.txt");
@@ -34,29 +34,31 @@ int main() {
     while (fin1 >> colors[i++]);
     fin1.close();
 
-    int choice = main_menu();
-
     list<Goat> trip;
 
-    switch (choice)
-    {
-    case 1:
-        add_goat(trip, names, colors);
-        break;
-    case 2:
-        delete_goat(trip);
-        break;
-    case 3:
-        display_trip(trip);
-        break;
-    case 4:
-        break;
-    default:
-        break;
+    while (again) {
+
+        int choice = main_menu();
+
+        switch (choice)
+        {
+            case 1:
+                add_goat(trip, names, colors);
+                break;
+            case 2:
+                delete_goat(trip);
+                break;
+            case 3:
+                display_trip(trip);
+                break;
+            case 4:
+                again = false;
+                break;
+            default:
+                break;
+        }
+
     }
-
-
-
 
     return 0;
 }
@@ -90,12 +92,12 @@ void add_goat(list<Goat> &trip, string names[], string colors[])
 {
     int nameIndex = rand() % SZ_NAMES;
     int randAge = rand() % MAX_AGE;
-    int colorIndex = rand() & SZ_COLORS;
+    int colorIndex = rand() % SZ_COLORS;
 
     Goat newGoat(names[nameIndex], randAge, colors[colorIndex]);
     trip.push_back(newGoat);
 
-    cout << "Goat added!" << endl;
+    cout << "Goat added!" << endl << endl;
 }
 
 
@@ -105,15 +107,12 @@ void delete_goat(list<Goat> &trip)
     int userDelete;
     userDelete = select_goat(trip);
 
-    // input Validation
-    if (userDelete < 0 || userDelete >= trip.size()) {
-        cout << "Invalid selection" << endl;
-    }
-
     // using an iterator to move to chosen position then delete the goat
     auto it = trip.begin();   // set iterator to beginning of list
     advance(it, userDelete);  // advance iterator to user selection point
     trip.erase(it);           // delete goat
+
+    cout << "Goat deleted!" << endl << endl;
 
 }
 
@@ -121,7 +120,11 @@ void delete_goat(list<Goat> &trip)
 // function to display the current trip
 void display_trip(list<Goat> trip)
 {
-
+    if (trip.empty())
+    {
+        cout << "No goats to display!" << endl << endl;
+    }
+    
     int i = 1;
 
     // range based for loop to go through the entire list and display contents
@@ -139,8 +142,18 @@ int select_goat(list<Goat> trip)
     display_trip(trip);
     int userSelection;
 
-    cout << "Select a goat --> " << endl;
-    cin >> userSelection;
+    do {
+        cout << "Select a goat --> " << endl;
+        cin >> userSelection;
+
+        // user entry input validation
+        if (userSelection < 0 || userSelection > trip.size())
+        {
+            cout << "Invalid entry" << endl;
+        }
+
+    } while (userSelection < 0 || userSelection > trip.size());
+    
 
     return userSelection - 1;  // -1 for proper indexing in the list
 }
