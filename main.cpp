@@ -124,15 +124,18 @@ void display_trip(list<Goat> trip)
     {
         cout << "No goats to display!" << endl << endl;
     }
-    
+
     int i = 1;
 
     // range based for loop to go through the entire list and display contents
     for (const auto& goat : trip)
     {
-        cout << left << setw(5) << "[" << i << "] " << goat.get_name() << "(" << goat.get_age() << ", " << goat.get_color() << ")" << endl;
+        cout << left << setw(5) << "";
+        cout << "[" << i << "] " << goat.get_name() << " (" << goat.get_age() << ", " << goat.get_color() << ")" << endl;
+        i++;
     }
 
+    cout << endl;
 }
 
 
@@ -143,7 +146,7 @@ int select_goat(list<Goat> trip)
     int userSelection;
 
     do {
-        cout << "Select a goat --> " << endl;
+        cout << "Select a goat --> ";
         cin >> userSelection;
 
         // user entry input validation
