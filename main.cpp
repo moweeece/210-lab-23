@@ -36,23 +36,21 @@ int main() {
 
     int choice = main_menu();
 
+    list<Goat> trip;
+
     switch (choice)
     {
     case 1:
-        // add a goat
+        add_goat(trip, names, colors);
         break;
     case 2:
-        // delete a goat
+        delete_goat(trip);
         break;
-
     case 3:
-        // list goats
+        display_trip(trip);
         break;
-
     case 4:
-        // quit
         break;
-    
     default:
         break;
     }
