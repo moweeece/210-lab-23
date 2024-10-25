@@ -34,7 +34,28 @@ int main() {
     while (fin1 >> colors[i++]);
     fin1.close();
 
-    main_menu();
+    int choice = main_menu();
+
+    switch (choice)
+    {
+    case 1:
+        // add a goat
+        break;
+    case 2:
+        // delete a goat
+        break;
+
+    case 3:
+        // list goats
+        break;
+
+    case 4:
+        // quit
+        break;
+    
+    default:
+        break;
+    }
 
 
 
@@ -67,16 +88,17 @@ int main_menu() {
 
 
 // function to add a goat to the trip
-void add_goat(list<Goat> &trip, string [], string [])
+void add_goat(list<Goat> &trip, string names[], string colors[])
 {
-    string goatName;
-    int goatAge;
-    string goatColor;
+    int nameIndex = rand() % SZ_NAMES;
+    int randAge = rand() % MAX_AGE;
+    int colorIndex = rand() & SZ_COLORS;
 
-    Goat newGoat();
-
+    Goat newGoat(names[nameIndex], randAge, colors[colorIndex]);
+    trip.push_back(newGoat);
 
 }
+
 
 // function to delete a goat from the trip
 void delete_goat(list<Goat> &trip)
@@ -85,8 +107,17 @@ void delete_goat(list<Goat> &trip)
 
 }
 
+
 // function to display the current trip
 void display_trip(list<Goat> trip)
+{
+
+
+}
+
+
+// function to select a goat
+int select_goat(list<Goat> trip)
 {
 
 
